@@ -17,6 +17,7 @@ class CreateSupplier extends Migration
             $table->id();
             $table->string('nama');
             $table->string('no_hp');
+            $table->text('alamat');
             $table->timestamps();
         });
     }

@@ -10,6 +10,11 @@
 @endsection
 
 @section('content')
+    @if (\Illuminate\Support\Facades\Session::has('failed'))
+        <script>
+            Swal.fire("Gagal!", '{{\Illuminate\Support\Facades\Session::get('failed')}}', "error")
+        </script>
+    @endif
     <div class="d-flex align-items-center justify-content-between mb-3">
         <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Tambah Pembelian</p>
         <ol class="breadcrumb breadcrumb-transparent mb-0">
@@ -31,33 +36,41 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="form-group w-100">
-                            <label for="supplier">Supplier</label>
-                            <select class="form-control" id="supplier" name="supplier">
-                                <option value="">--pilih supplier--</option>
-                                @foreach($supplier as $k)
-                                    <option value="{{ $k->id }}">{{ $k->nama }}</option>
-                                @endforeach
-                            </select>
+                <form method="post" id="form-submit">
+                    @csrf
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="form-group w-100">
+                                <label for="supplier">Supplier</label>
+                                <select class="form-control" id="supplier" name="supplier">
+                                    <option value="">--pilih supplier--</option>
+                                    @foreach($supplier as $k)
+                                        <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="w-100">
+                                <label for="no_nota" class="form-label">No. Nota</label>
+                                <input type="text" class="form-control" id="no_nota" placeholder="No. Nota"
+                                       name="no_nota">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="w-100">
+                                <label for="tanggal" class="form-label">Tanggal Pembelian</label>
+                                <input type="date" class="form-control" id="tanggal" value="{{ date('Y-m-d') }}"
+                                       name="tanggal">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <div class="w-100">
-                            <label for="no_nota" class="form-label">No. Nota</label>
-                            <input type="text" class="form-control" id="no_nota" placeholder="No. Nota"
-                                   name="no_nota">
-                        </div>
+                    <div class="w-100">
+                        <label for="keterangan" class="form-label">Keterangan</label>
+                        <textarea rows="3" class="form-control" id="keterangan"
+                                  name="keterangan"></textarea>
                     </div>
-                    <div class="col-3">
-                        <div class="w-100">
-                            <label for="tanggal" class="form-label">Tanggal Pembelian</label>
-                            <input type="date" class="form-control" id="tanggal" value="{{ date('Y-m-d') }}"
-                                   name="tanggal">
-                        </div>
-                    </div>
-                </div>
+                </form>
                 <hr>
                 <div class="form-group w-100">
                     <label for="barang">Barang</label>
@@ -110,6 +123,66 @@
                     <tbody>
                     </tbody>
                 </table>
+                <hr>
+                <div class="row align-items-center mb-1">
+                    <div class="col-9 text-right">
+                        <span class="font-weight-bold">Sub Total :</span>
+                    </div>
+                    <div class="col-3">
+                        <div class="w-100">
+                            <input type="number" class="form-control text-right" id="sub_total"
+                                   name="sub_total" value="0" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-1">
+                    <div class="col-9 text-right">
+                        <span class="font-weight-bold">Diskon :</span>
+                    </div>
+                    <div class="col-3">
+                        <div class="w-100">
+                            <input type="number" class="form-control text-right" id="diskon"
+                                   name="diskon" value="0" form="form-submit">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-1">
+                    <div class="col-9 text-right">
+                        <span class="font-weight-bold">Total :</span>
+                    </div>
+                    <div class="col-3">
+                        <div class="w-100">
+                            <input type="number" class="form-control text-right" id="total-all"
+                                   name="total-all" value="0" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-1">
+                    <div class="col-9 text-right">
+                        <span class="font-weight-bold">Terbayar :</span>
+                    </div>
+                    <div class="col-3">
+                        <div class="w-100">
+                            <input type="number" class="form-control text-right" id="terbayar"
+                                   name="terbayar" value="0" form="form-submit">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-1">
+                    <div class="col-9 text-right">
+                        <span class="font-weight-bold">Sisa :</span>
+                    </div>
+                    <div class="col-3">
+                        <div class="w-100">
+                            <input type="number" class="form-control text-right" id="sisa"
+                                   name="sisa" value="0">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="w-100 text-right">
+                    <a href="#" class="btn btn-primary" id="btn-save"><i class="fa fa-send mr-2"></i><span>Simpan</span></a>
+                </div>
             </div>
         </div>
 
@@ -135,6 +208,19 @@
             $('#total').val(total);
         }
 
+        function calculateSisa() {
+            let subTotal = $('#sub_total').val() !== '' ? $('#sub_total').val() : '0';
+            let diskon = $('#diskon').val() !== '' ? $('#diskon').val() : '0';
+            let terbayar = $('#terbayar').val() !== '' ? $('#terbayar').val() : '0';
+            let intSubTotal = parseInt(subTotal);
+            let intDiskon = parseInt(diskon);
+            let intTerbayar = parseInt(terbayar);
+            let totalAll = intSubTotal - intDiskon;
+            let sisa = totalAll - intTerbayar;
+            $('#total-all').val(totalAll);
+            $('#sisa').val(sisa);
+        }
+
         function clear() {
             $('#barang').val('');
             $('#qty').val(0);
@@ -155,7 +241,35 @@
             });
         }
 
+        function destroy(id) {
+            let url = path + '/' + id + '/delete';
+            AjaxPost(url, {}, function () {
+                SuccessAlert('Berhasil!', 'Berhasil menghapus data...');
+                reload();
+            });
+        }
 
+        function deleteEvent() {
+            $('.btn-delete').on('click', function (e) {
+                e.preventDefault();
+                let id = this.dataset.id;
+                Swal.fire({
+                    title: "Konfirmasi!",
+                    text: "Apakah anda yakin menghapus data?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.value) {
+                        destroy(id);
+                    }
+                });
+
+            })
+        }
         $(document).ready(function () {
 
             table = DataTableGenerator('#table-data', path, [
@@ -178,8 +292,7 @@
                 },
                 {
                     data: null, render: function (data) {
-                        return '<a href="#" class="btn btn-sm btn-warning btn-edit mr-1" data-id="' + data['id'] + '" data-name="' + data['nama'] + '"><i class="fa fa-edit f12"></i></a>' +
-                            '<a href="#" class="btn btn-sm btn-danger btn-delete" data-id="' + data['id'] + '"><i class="fa fa-trash f12"></i></a>';
+                        return '<a href="#" class="btn btn-sm btn-danger btn-delete" data-id="' + data['id'] + '"><i class="fa fa-trash f12"></i></a>';
                     }
                 },
             ], [
@@ -194,6 +307,11 @@
             ], function (d) {
             }, {
                 "fnDrawCallback": function (setting) {
+                    let data = this.fnGetData();
+                    let total = data.map(item => item['total']).reduce((prev, next) => prev + next, 0);
+                    $('#sub_total').val(total);
+                    calculateSisa();
+                    deleteEvent();
                 }
             });
 
@@ -215,12 +333,40 @@
                 });
             });
 
+            $('#btn-save').on('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: "Konfirmasi!",
+                    text: "Apakah anda yakin meyimpan data?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.value) {
+                        $('#form-submit').submit();
+                    }
+                });
+            });
+
+            deleteEvent();
             $('#qty').on('input', function () {
                 calculateTotal();
-            })
+            });
+
             $('#harga').on('input', function () {
                 calculateTotal();
-            })
+            });
+
+            $('#diskon').on('input', function () {
+                calculateSisa();
+            });
+
+            $('#terbayar').on('input', function () {
+                calculateSisa();
+            });
         });
     </script>
 @endsection

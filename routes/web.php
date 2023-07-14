@@ -44,8 +44,9 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::group(['prefix' => 'pembelian'], function () {
         Route::match(['get', 'post'], '/', [\App\Http\Controllers\PembelianController::class, 'index'])->name('pembelian');
+        Route::get('/{id}/info', [\App\Http\Controllers\PembelianController::class, 'info'])->name('pembelian.info');
         Route::match(['get', 'post'], '/tambah', [\App\Http\Controllers\PembelianController::class, 'add'])->name('pembelian.add');
-        Route::post('/{id}', [\App\Http\Controllers\BarangController::class, 'patch'])->name('barang.update');
+        Route::post( '/tambah/{id}/delete', [\App\Http\Controllers\PembelianController::class, 'deleteCart'])->name('pembelian.add.delete.cart');
         Route::post('/{id}/delete', [\App\Http\Controllers\BarangController::class, 'destroy'])->name('barang.delete');
     });
 });

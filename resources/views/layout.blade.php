@@ -54,7 +54,7 @@
                 <img src="{{ asset('/assets/user.png') }}" class="img-circle" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block" style="font-size: 14px;">Admin</a>
+                <a href="#" class="d-block" style="font-size: 14px;">{{ auth()->user()->username }}</a>
             </div>
         </div>
         <nav class="mt-2">
@@ -97,47 +97,54 @@
                         <p>Barang</p>
                     </a>
                 </li>
-{{--                <li class="nav-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">--}}
-{{--                    Pesanan--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{ route('admin.pesanan.menunggu') }}"--}}
-{{--                       class="nav-link">--}}
-{{--                        <i class="fa fa-spinner nav-icon" aria-hidden="true"></i>--}}
-{{--                        <p>Pesanan Menunggu</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{ route('admin.pesanan.proses') }}"--}}
-{{--                       class="nav-link">--}}
-{{--                        <i class="fa fa-cogs nav-icon" aria-hidden="true"></i>--}}
-{{--                        <p>Pesanan Proses</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{ route('admin.pesanan.selesai') }}"--}}
-{{--                       class="nav-link">--}}
-{{--                        <i class="fa fa-check nav-icon" aria-hidden="true"></i>--}}
-{{--                        <p>Pesanan Selesai</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">--}}
-{{--                    Laporan--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{ route('admin.laporan.pesanan') }}"--}}
-{{--                       class="nav-link">--}}
-{{--                        <i class="fa fa-cogs nav-icon" aria-hidden="true"></i>--}}
-{{--                        <p>Pesanan</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a href="#"--}}
-{{--                       class="nav-link">--}}
-{{--                        <i class="fa fa-money nav-icon" aria-hidden="true"></i>--}}
-{{--                        <p>Pendapatan</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                <li class="nav-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">
+                    Transaksi
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('pembelian') }}"
+                       class="nav-link">
+                        <i class="fa fa-shopping-basket nav-icon" aria-hidden="true"></i>
+                        <p>Pembelian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#"
+                       class="nav-link">
+                        <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
+                        <p>Penjualan</p>
+                    </a>
+                </li>
+                {{--                <li class="nav-item">--}}
+                {{--                    <a href="{{ route('admin.pesanan.proses') }}"--}}
+                {{--                       class="nav-link">--}}
+                {{--                        <i class="fa fa-cogs nav-icon" aria-hidden="true"></i>--}}
+                {{--                        <p>Pesanan Proses</p>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a href="{{ route('admin.pesanan.selesai') }}"--}}
+                {{--                       class="nav-link">--}}
+                {{--                        <i class="fa fa-check nav-icon" aria-hidden="true"></i>--}}
+                {{--                        <p>Pesanan Selesai</p>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
+                {{--                <li class="nav-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">--}}
+                {{--                    Laporan--}}
+                {{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a href="{{ route('admin.laporan.pesanan') }}"--}}
+                {{--                       class="nav-link">--}}
+                {{--                        <i class="fa fa-cogs nav-icon" aria-hidden="true"></i>--}}
+                {{--                        <p>Pesanan</p>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a href="#"--}}
+                {{--                       class="nav-link">--}}
+                {{--                        <i class="fa fa-money nav-icon" aria-hidden="true"></i>--}}
+                {{--                        <p>Pendapatan</p>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
             </ul>
         </nav>
     </div>

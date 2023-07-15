@@ -47,7 +47,14 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/{id}/info', [\App\Http\Controllers\PembelianController::class, 'info'])->name('pembelian.info');
         Route::match(['get', 'post'], '/tambah', [\App\Http\Controllers\PembelianController::class, 'add'])->name('pembelian.add');
         Route::post( '/tambah/{id}/delete', [\App\Http\Controllers\PembelianController::class, 'deleteCart'])->name('pembelian.add.delete.cart');
-        Route::post('/{id}/delete', [\App\Http\Controllers\BarangController::class, 'destroy'])->name('barang.delete');
+    });
+
+    Route::group(['prefix' => 'penjualan'], function () {
+        Route::match(['get', 'post'], '/', [\App\Http\Controllers\PenjualanController::class, 'index'])->name('penjualan');
+//        Route::get('/{id}/info', [\App\Http\Controllers\PembelianController::class, 'info'])->name('pembelian.info');
+        Route::match(['get', 'post'], '/tambah', [\App\Http\Controllers\PenjualanController::class, 'add'])->name('penjualan.add');
+        Route::get( '/tambah/{id}/barang', [\App\Http\Controllers\PenjualanController::class, 'detail_barang'])->name('penjualan.add.detail.barang');
+        Route::post( '/tambah/{id}/delete', [\App\Http\Controllers\PenjualanController::class, 'deleteCart'])->name('penjualan.add.delete.cart');
     });
 });
 

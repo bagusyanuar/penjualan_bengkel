@@ -7,12 +7,12 @@
         </script>
     @endif
     <div class="d-flex align-items-center justify-content-between mb-3">
-        <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Pembelian</p>
+        <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Penjualan</p>
         <ol class="breadcrumb breadcrumb-transparent mb-0">
             <li class="breadcrumb-item">
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Pembelian
+            <li class="breadcrumb-item active" aria-current="page">Penjualan
             </li>
         </ol>
     </div>
@@ -20,7 +20,7 @@
         <div class="card card-outline card-info">
             <div class="card-header">
                 <div class="text-right mb-2">
-                    <a href="{{ route('pembelian.add') }}" class="btn btn-primary btn-sm"><i
+                    <a href="{{ route('penjualan.add') }}" class="btn btn-primary btn-sm"><i
                             class="fa fa-plus mr-1"></i><span
                             class="font-weight-bold">Tambah</span></a>
                 </div>
@@ -32,7 +32,7 @@
                         <th width="5%" class="text-center">#</th>
                         <th width="8%" class="text-center">Tanggal</th>
                         <th width="10%" class="text-center">No. Nota</th>
-                        <th width="10%">Supplier</th>
+                        <th width="10%">Customer</th>
                         <th>Keterangan</th>
                         <th width="8%" class="text-right">Total (Rp.)</th>
                         <th width="8%" class="text-right">Terbayar (Rp.)</th>
@@ -54,16 +54,16 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalInfoLabel">Informasi Pembelian</h5>
+                    <h5 class="modal-title" id="modalInfoLabel">Informasi Penjualan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="w-100 mb-1">
-                        <label for="supplier" class="form-label">Supplier</label>
-                        <input type="text" class="form-control" id="supplier"
-                               name="supplier" readonly>
+                        <label for="customer" class="form-label">Customer</label>
+                        <input type="text" class="form-control" id="customer"
+                               name="customer" readonly>
                     </div>
                     <div class="row mb-1">
                         <div class="col-6">
@@ -169,7 +169,7 @@
     <script src="{{ asset('/js/helper.js') }}"></script>
     <script>
         var table, tableInfo;
-        var path = '{{ route('pembelian') }}';
+        var path = '{{ route('penjualan') }}';
         var dataSet = [];
 
         function reload() {
@@ -221,7 +221,7 @@
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false, orderable: false},
                 {data: 'tanggal'},
                 {data: 'no_nota'},
-                {data: 'supplier.nama'},
+                {data: 'customer'},
                 {data: 'keterangan'},
                 {
                     data: 'total', name: 'total', render: function (data) {
@@ -241,7 +241,7 @@
                 {
                     data: 'sisa', name: 'sisa', render: function (data) {
                         if (data > 0) {
-                            return '<div class="pl-3 pr-3 pt-1 pb-1" style="background-color: #c30101; color: whitesmoke; border-radius: 5px;">Hutang</div>'
+                            return '<div class="pl-3 pr-3 pt-1 pb-1" style="background-color: #c30101; color: whitesmoke; border-radius: 5px;">Piutang</div>'
                         }
                         return '<div class="pl-3 pr-3 pt-1 pb-1" style="background-color: #00a65a; color: whitesmoke; border-radius: 5px;">Lunas</div>';
                     }

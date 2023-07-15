@@ -42,7 +42,13 @@ async function AjaxPost(url, param = {}, onSuccess = function () {
             onAccepted();
         }
     } catch (e) {
-        ErrorAlert('Error', e.responseText.toString());
+        let err = JSON.parse(e.responseText);
+        if (err.message !== undefined) {
+            console.log('oke');
+            ErrorAlert('Error', err.message.toString());
+        }else {
+            ErrorAlert('Error', e.responseText.toString());
+        }
     }
 }
 

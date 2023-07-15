@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#"
+                    <a href="{{ route('penjualan') }}"
                        class="nav-link">
                         <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
                         <p>Penjualan</p>

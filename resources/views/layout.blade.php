@@ -114,6 +114,23 @@
                         <p>Penjualan</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('pembayaran-hutang') }}"
+                       class="nav-link">
+                        <i class="fa fa-cc nav-icon" aria-hidden="true"></i>
+                        <p>Pembayaran Hutang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('pembayaran-piutang') }}"
+                       class="nav-link">
+                        <i class="fa fa-money nav-icon" aria-hidden="true"></i>
+                        <p>Pembayaran Piutang</p>
+                    </a>
+                </li>
+                <li class="nav-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">
+                    Laporan
+                </li>
                 {{--                <li class="nav-item">--}}
                 {{--                    <a href="{{ route('admin.pesanan.proses') }}"--}}
                 {{--                       class="nav-link">--}}

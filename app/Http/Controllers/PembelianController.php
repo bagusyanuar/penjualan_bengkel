@@ -99,7 +99,6 @@ class PembelianController extends CustomController
                 DB::commit();
                 return redirect()->route('pembelian')->with('success', 'Berhasil Menambah Data Pembelian');
             } catch (\Exception $e) {
-                dd($e->getMessage());
                 DB::rollBack();
                 return redirect()->back()->with('failed', 'terjadi kesalahan server...');
             }

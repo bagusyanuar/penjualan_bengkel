@@ -195,13 +195,14 @@
         }
 
         function setInformation(p) {
-            $('#supplier').val(p['supplier']['nama']);
+            $('#customer').val(p['customer']);
             $('#no_nota').val(p['no_nota']);
             $('#tanggal').val(p['tanggal']);
             $('#sub_total').val(p['sub_total']);
             $('#diskon').val(p['diskon']);
             $('#total-all').val(p['total']);
             $('#terbayar').val(p['terbayar']);
+            $('#keterangan').val(p['keterangan']);
             $('#sisa').val(p['sisa']);
             let tmpDataset = [];
             $.each(p['details'], function (k, v) {

@@ -8,6 +8,7 @@ use App\Helper\CustomController;
 use App\Models\Barang;
 use App\Models\Penjualan;
 use App\Models\PenjualanDetail;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class PenjualanController extends CustomController
@@ -24,6 +25,15 @@ class PenjualanController extends CustomController
             return $this->basicDataTables($data);
         }
         return view('penjualan.index');
+    }
+
+    public function info($id) {
+        try {
+            $data = Penjualan::with(['details.barang'])->where('id', '=', $id)->first();
+            return $this->jsonResponse('success', 200, $data);
+        } catch (\Exception $e) {
+            return $this->jsonResponse('failed ' . $e->getMessage(), 500);
+        }
     }
 
     public function add()
@@ -69,7 +79,7 @@ class PenjualanController extends CustomController
                 $data_request = [
                     'customer' => $this->postField('customer'),
                     'tanggal' => $this->postField('tanggal'),
-                    'no_nota' => $this->postField('no_nota'),
+                    'no_nota' => 'PNJ-'.Carbon::now()->format('YmdHis'),
                     'keterangan' => $this->postField('keterangan'),
                     'sub_total' => $subTotal,
                     'diskon' => $diskon,

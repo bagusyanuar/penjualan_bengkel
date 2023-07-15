@@ -51,10 +51,22 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::group(['prefix' => 'penjualan'], function () {
         Route::match(['get', 'post'], '/', [\App\Http\Controllers\PenjualanController::class, 'index'])->name('penjualan');
-//        Route::get('/{id}/info', [\App\Http\Controllers\PembelianController::class, 'info'])->name('pembelian.info');
+        Route::get('/{id}/info', [\App\Http\Controllers\PenjualanController::class, 'info'])->name('penjualan.info');
         Route::match(['get', 'post'], '/tambah', [\App\Http\Controllers\PenjualanController::class, 'add'])->name('penjualan.add');
         Route::get( '/tambah/{id}/barang', [\App\Http\Controllers\PenjualanController::class, 'detail_barang'])->name('penjualan.add.detail.barang');
         Route::post( '/tambah/{id}/delete', [\App\Http\Controllers\PenjualanController::class, 'deleteCart'])->name('penjualan.add.delete.cart');
+    });
+
+    Route::group(['prefix' => 'pembayaran-hutang'], function () {
+        Route::match(['get', 'post'], '/', [\App\Http\Controllers\PembayaranHutangController::class, 'index'])->name('pembayaran-hutang');
+        Route::match(['get', 'post'], '/tambah', [\App\Http\Controllers\PembayaranHutangController::class, 'add'])->name('pembayaran-hutang.add');
+        Route::post('/{id}/delete', [\App\Http\Controllers\PembayaranHutangController::class, 'destroy'])->name('pembayaran-hutang.delete');
+    });
+
+    Route::group(['prefix' => 'pembayaran-piutang'], function () {
+        Route::match(['get', 'post'], '/', [\App\Http\Controllers\PembayaranPiutangController::class, 'index'])->name('pembayaran-piutang');
+        Route::match(['get', 'post'], '/tambah', [\App\Http\Controllers\PembayaranPiutangController::class, 'add'])->name('pembayaran-piutang.add');
+        Route::post('/{id}/delete', [\App\Http\Controllers\PembayaranPiutangController::class, 'destroy'])->name('pembayaran-piutang.delete');
     });
 });
 

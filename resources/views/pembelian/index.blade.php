@@ -202,6 +202,7 @@
             $('#diskon').val(p['diskon']);
             $('#total-all').val(p['total']);
             $('#terbayar').val(p['terbayar']);
+            $('#keterangan').val(p['keterangan']);
             $('#sisa').val(p['sisa']);
             let tmpDataset = [];
             $.each(p['details'], function (k, v) {

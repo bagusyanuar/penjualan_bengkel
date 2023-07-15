@@ -39,23 +39,16 @@
                 <form method="post" id="form-submit">
                     @csrf
                     <div class="row">
-                        <div class="col-5">
+                        <div class="col-9">
                             <div class="w-100">
                                 <label for="customer" class="form-label">Customer</label>
                                 <input type="text" class="form-control" id="customer" placeholder="Customer"
                                        name="customer">
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="w-100">
-                                <label for="no_nota" class="form-label">No. Nota</label>
-                                <input type="text" class="form-control" id="no_nota" placeholder="No. Nota"
-                                       name="no_nota">
-                            </div>
-                        </div>
                         <div class="col-3">
                             <div class="w-100">
-                                <label for="tanggal" class="form-label">Tanggal Pembelian</label>
+                                <label for="tanggal" class="form-label">Tanggal Penjualan</label>
                                 <input type="date" class="form-control" id="tanggal" value="{{ date('Y-m-d') }}"
                                        name="tanggal">
                             </div>

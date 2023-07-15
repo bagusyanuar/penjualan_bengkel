@@ -27,4 +27,14 @@ class Penjualan extends Model
     {
         return $this->hasMany(PenjualanDetail::class, 'penjualan_id');
     }
+
+    public function getPelunasanAttribute()
+    {
+        return $this->hasMany(PembayaranPiutang::class, 'penjualan_id')->get()->sum('nominal');
+    }
+
+    public function getSisaPiutangAttribute()
+    {
+        return $this->sisa - $this->getPelunasanAttribute();
+    }
 }

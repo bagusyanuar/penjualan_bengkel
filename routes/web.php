@@ -68,5 +68,16 @@ Route::group(['middleware' => 'auth'], function (){
         Route::match(['get', 'post'], '/tambah', [\App\Http\Controllers\PembayaranPiutangController::class, 'add'])->name('pembayaran-piutang.add');
         Route::post('/{id}/delete', [\App\Http\Controllers\PembayaranPiutangController::class, 'destroy'])->name('pembayaran-piutang.delete');
     });
+
+    Route::group(['prefix' => 'laporan'], function () {
+        Route::get( '/pembelian', [\App\Http\Controllers\LaporanController::class, 'pembelian'])->name('laporan.pembelian');
+        Route::get( '/pembelian/{id}/info', [\App\Http\Controllers\LaporanController::class, 'info_pembelian'])->name('laporan.pembelian.info');
+        Route::get( '/pembelian/cetak', [\App\Http\Controllers\LaporanController::class, 'cetak_pembelian'])->name('laporan.pembelian.cetak');
+        Route::get( '/penjualan', [\App\Http\Controllers\LaporanController::class, 'penjualan'])->name('laporan.penjualan');
+        Route::get( '/penjualan/{id}/info', [\App\Http\Controllers\LaporanController::class, 'info_penjualan'])->name('laporan.penjualan.info');
+        Route::get( '/penjualan/cetak', [\App\Http\Controllers\LaporanController::class, 'cetak_penjualan'])->name('laporan.penjualan.cetak');
+        Route::get( '/hutang', [\App\Http\Controllers\LaporanController::class, 'hutang'])->name('laporan.hutang');
+        Route::get( '/hutang/cetak', [\App\Http\Controllers\LaporanController::class, 'cetak_hutang'])->name('laporan.hutang.cetak');
+    });
 });
 

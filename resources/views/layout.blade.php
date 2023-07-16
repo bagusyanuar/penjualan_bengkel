@@ -131,6 +131,27 @@
                 <li class="nav-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">
                     Laporan
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('laporan.pembelian') }}"
+                       class="nav-link">
+                        <i class="fa fa-sticky-note nav-icon" aria-hidden="true"></i>
+                        <p>Pembelian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('laporan.penjualan') }}"
+                       class="nav-link">
+                        <i class="fa fa-sticky-note nav-icon" aria-hidden="true"></i>
+                        <p>Penjualan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('laporan.hutang') }}"
+                       class="nav-link">
+                        <i class="fa fa-sticky-note nav-icon" aria-hidden="true"></i>
+                        <p>Hutang</p>
+                    </a>
+                </li>
                 {{--                <li class="nav-item">--}}
                 {{--                    <a href="{{ route('admin.pesanan.proses') }}"--}}
                 {{--                       class="nav-link">--}}

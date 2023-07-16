@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get( '/penjualan/cetak', [\App\Http\Controllers\LaporanController::class, 'cetak_penjualan'])->name('laporan.penjualan.cetak');
         Route::get( '/hutang', [\App\Http\Controllers\LaporanController::class, 'hutang'])->name('laporan.hutang');
         Route::get( '/hutang/cetak', [\App\Http\Controllers\LaporanController::class, 'cetak_hutang'])->name('laporan.hutang.cetak');
+        Route::get( '/piutang', [\App\Http\Controllers\LaporanController::class, 'piutang'])->name('laporan.piutang');
+        Route::get( '/piutang/cetak', [\App\Http\Controllers\LaporanController::class, 'cetak_piutang'])->name('laporan.piutang.cetak');
     });
 });
 

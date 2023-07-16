@@ -152,6 +152,13 @@
                         <p>Hutang</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('laporan.piutang') }}"
+                       class="nav-link">
+                        <i class="fa fa-sticky-note nav-icon" aria-hidden="true"></i>
+                        <p>Piutang</p>
+                    </a>
+                </li>
                 {{--                <li class="nav-item">--}}
                 {{--                    <a href="{{ route('admin.pesanan.proses') }}"--}}
                 {{--                       class="nav-link">--}}

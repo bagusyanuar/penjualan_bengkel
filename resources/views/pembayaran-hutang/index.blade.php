@@ -31,7 +31,7 @@
                     <tr>
                         <th width="5%" class="text-center">#</th>
                         <th width="12%" class="text-center">Tanggal</th>
-                        <th width="15%" class="text-center">No. Transaksi</th>
+                        <th width="15%" class="text-center">No. Pembayaran</th>
                         <th width="15%">Supplier</th>
                         <th>Keterangan</th>
                         <th width="12%" class="text-right">Nominal (Rp.)</th>

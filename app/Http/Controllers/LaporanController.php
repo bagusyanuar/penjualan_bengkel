@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Helper\CustomController;
+use App\Models\Barang;
 use App\Models\PembayaranHutang;
 use App\Models\PembayaranPiutang;
 use App\Models\Pembelian;
@@ -176,5 +177,20 @@ class LaporanController extends CustomController
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($html)->setPaper('a4', 'landscape');
         return $pdf->stream();
+    }
+
+    public function stok()
+    {
+        if ($this->request->ajax()) {
+            $data = Barang::with(['kategori'])->get();
+            return $this->basicDataTables($data);
+        }
+        return view('laporan.stok');
+    }
+
+    public function cetak_stok()
+    {
+        $data = Barang::with(['kategori'])->get();
+        return $this->convertToPdf('cetak.stok', ['data' => $data]);
     }
 }
